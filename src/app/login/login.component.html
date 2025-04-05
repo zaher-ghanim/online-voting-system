@@ -1,0 +1,17 @@
+<div class="login-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+            <mat-label>User Name</mat-label>
+            <input matInput type="text" formControlName="userName">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="text" formControlName="password">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
+        <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+    </form>
+</div>
+test
