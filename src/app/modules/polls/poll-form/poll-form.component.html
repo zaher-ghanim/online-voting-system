@@ -1,0 +1,51 @@
+<div class="poll-form-container">
+    <h2>{{ isEditMode ? 'Edit Poll' : 'Create New Poll' }}</h2>
+
+    <form [formGroup]="pollForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Question</mat-label>
+            <input matInput id="question" formControlName="question" >
+            <mat-error *ngIf="pollForm.get('question')?.invalid && pollForm.get('question')?.touched">
+                Question is required
+            </mat-error>
+        </mat-form-field>
+
+        <div formArrayName="options">
+            <h4>Options</h4>
+
+            <div *ngFor="let option of options.controls; let i = index" [formGroupName]="i" class="option-group">
+                <div class="option-row">
+                    <mat-form-field appearance="outline" class="flex-grow">
+                        <mat-label>Option Text</mat-label>
+                        <input matInput formControlName="text" 
+                            placeholder="Option text">
+                        <mat-error *ngIf="option.get('text')?.invalid && option.get('text')?.touched">
+                            Option text is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <button mat-icon-button color="warn" type="button" (click)="removeOption(i)"
+                        [disabled]="options.length <= 2">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button mat-raised-button color="accent" type="button" (click)="addOption()">
+                Add Option
+            </button>
+        </div>
+
+        <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit" [disabled]="pollForm.invalid">
+                {{ isEditMode ? 'Update Poll' : 'Create Poll' }}
+            </button>
+
+            <button mat-stroked-button color="primary" type="button" (click)="router.navigate(['/polls'])">
+                Cancel
+            </button>
+        </div>
+    </form>
+</div>

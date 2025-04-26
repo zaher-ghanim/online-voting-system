@@ -13,16 +13,25 @@ export class DatainitService {
     if (!localStorage.getItem('users')) {
       const initialUsers: User[] = [
         {
+          id: '1',
+          username: '1',
+          password: '1',
+          isAdmin: false,
+          hasVoted: false
+        },
+        {
           id: 'admin1',
           username: 'admin',
           password: 'admin',
-          isAdmin: true
+          isAdmin: true,
+          hasVoted: false
         },
         {
           id: 'v1',
           username: 'voter1',
           password: 'voter1',
-          isAdmin: false
+          isAdmin: false,
+          hasVoted: false
         }
       ];
       localStorage.setItem('users', JSON.stringify(initialUsers));

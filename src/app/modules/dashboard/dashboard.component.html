@@ -1,0 +1,47 @@
+<div class="dashboard-container">
+    <h2>Active Polls</h2>
+
+    <mat-card *ngIf="currentUser?.hasVoted" class="info-card">
+        <mat-card-content>
+            <mat-icon color="primary">info</mat-icon>
+            You have already voted. Thank you for participating!
+        </mat-card-content>
+    </mat-card>
+
+    <div *ngFor="let poll of polls" class="poll-card">
+        <mat-card class="poll-mat-card">
+            <mat-card-header>
+                <mat-card-title>{{ poll.question }}</mat-card-title>
+               
+            </mat-card-header>
+
+            <mat-card-content>
+              
+
+                <div *ngIf="poll.isActive && !hasVotedInPoll(poll.id)" class="poll-options">
+                    <div *ngFor="let option of poll.options" class="option">
+                        <button mat-raised-button color="primary" (click)="vote(poll.id, option.id)">
+                            {{ option.text }}
+                        </button>
+                    </div>
+                </div>
+
+                <div *ngIf="poll.isActive && hasVotedInPoll(poll.id)" class="poll-results">
+                    <div *ngFor="let option of poll.options" class="result">
+                        <mat-progress-bar mode="determinate"
+                            [value]="(option.votes / getTotalVotes(poll.options)) * 100">
+                        </mat-progress-bar>
+                        <div class="result-text">
+                            {{ option.text }}: {{ option.votes }} votes
+                            ({{ (option.votes / getTotalVotes(poll.options)) * 100 | number:'1.0-0' }}%)
+                        </div>
+                    </div>
+                </div>
+                <mat-card-subtitle>
+                    Created by: {{ poll.createdBy }} on {{ poll.createdAt | date }}
+                </mat-card-subtitle>
+                <p>Status: <strong>{{ poll.isActive ? 'Active' : 'Inactive' }}</strong></p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

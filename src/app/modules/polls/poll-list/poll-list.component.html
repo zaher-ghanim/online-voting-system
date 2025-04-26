@@ -1,0 +1,53 @@
+<div class="poll-list-container">
+    <h2>Polls Management</h2>
+
+    <div *ngIf="isAdmin" class="mb-3">
+        <button mat-raised-button color="primary" [routerLink]="'/polls/create'">
+            Create New Poll
+        </button>
+    </div>
+
+    <mat-card *ngFor="let poll of polls" class="poll-card">
+        <mat-card-header>
+            <mat-card-title>{{ poll.question }}</mat-card-title>
+            <mat-card-subtitle>
+                Created by: {{ poll.createdBy }} on {{ poll.createdAt | date }}
+            </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <p>Status:
+                <span [ngClass]="poll.isActive ? 'text-success' : 'text-danger'">
+                    {{ poll.isActive ? 'Active' : 'Inactive' }}
+                </span>
+            </p>
+
+            <div class="poll-results">
+                <h4>Results:</h4>
+                <div *ngFor="let option of poll.options" class="result">
+                    <mat-progress-bar mode="determinate" [value]="(option.votes / getTotalVotes(poll.options)) * 100">
+                    </mat-progress-bar>
+                    <div class="option-text">
+                        {{ option.text }}: {{ option.votes }} votes ({{ (option.votes / getTotalVotes(poll.options)) *
+                        100 | number:'1.0-0' }}%)
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+
+        <mat-card-actions *ngIf="isAdmin" class="poll-actions">
+            <button mat-raised-button [color]="poll.isActive ? 'warn' : 'accent'"
+                (click)="togglePollStatus(poll.id, !poll.isActive)">
+                {{ poll.isActive ? 'Deactivate' : 'Activate' }}
+            </button>
+
+            <button mat-raised-button color="primary" [routerLink]="['/polls/edit', poll.id]">
+                Edit
+            </button>
+
+            <button mat-raised-button color="warn" (click)="deletePoll(poll.id)">
+                Delete
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

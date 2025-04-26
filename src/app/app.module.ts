@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { share } from 'rxjs';
+import { SharedModule } from './modules/shared/shared.module';
 
 
 @NgModule({
@@ -16,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 		CommonModule,
 		AppRoutingModule,
 		FormsModule,
-		HttpClientModule
+		HttpClientModule,SharedModule
 	]
 })
 export class AppModule { }
