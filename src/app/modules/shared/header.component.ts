@@ -6,7 +6,7 @@ import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-header',
-  standalone:false,
+  standalone: false,
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.sass']  // Changed from .sass to .scss to match our setup
 })
@@ -25,7 +25,7 @@ export class HeaderComponent {
       });
   }
 
-  
+
 
   logout(): void {
     this.authService.logout();
