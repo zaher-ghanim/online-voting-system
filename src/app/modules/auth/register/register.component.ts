@@ -8,7 +8,7 @@ import { UserService } from '../../../services/user.service';
   selector: 'app-register',
   standalone: false,
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.sass']
+  styleUrls: ['./register.component.sass'],
 })
 export class RegisterComponent {
   registerForm: FormGroup;
@@ -22,7 +22,7 @@ export class RegisterComponent {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      isAdmin: [false]
+      isAdmin: [false],
     });
   }
 
@@ -32,7 +32,7 @@ export class RegisterComponent {
         id: Math.random().toString(36).substr(2, 9),
         username: this.registerForm.value.username,
         password: this.registerForm.value.password,
-        isAdmin: this.registerForm.value.isAdmin
+        isAdmin: this.registerForm.value.isAdmin,
       };
 
       this.userService.createUser(user);

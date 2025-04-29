@@ -5,9 +5,9 @@ import { PollService } from '../../../services/poll.service';
 
 @Component({
   selector: 'app-poll-list',
-  standalone:false,
+  standalone: false,
   templateUrl: './poll-list.component.html',
-  styleUrls: ['./poll-list.component.sass']
+  styleUrls: ['./poll-list.component.sass'],
 })
 export class PollListComponent {
   polls: Poll[] = [];
@@ -31,7 +31,7 @@ export class PollListComponent {
   }
 
   deletePoll(pollId: string): void {
-    const polls = this.pollService.getAllPolls().filter(p => p.id !== pollId);
+    const polls = this.pollService.getAllPolls().filter((p) => p.id !== pollId);
     localStorage.setItem('polls', JSON.stringify(polls));
     this.loadPolls();
   }

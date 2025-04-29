@@ -7,11 +7,11 @@ import { AdminGuard } from '../../guards/admin.guard';
 const routes: Routes = [
   { path: '', component: PollListComponent },
   { path: 'create', component: PollFormComponent, canActivate: [AdminGuard] },
-  { path: 'edit/:id', component: PollFormComponent, canActivate: [AdminGuard] }
+  { path: 'edit/:id', component: PollFormComponent, canActivate: [AdminGuard] },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PollsRoutingModule { }
+export class PollsRoutingModule {}

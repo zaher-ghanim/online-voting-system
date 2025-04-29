@@ -18,7 +18,8 @@ import { SharedModule } from './modules/shared/shared.module';
 		CommonModule,
 		AppRoutingModule,
 		FormsModule,
-		HttpClientModule,SharedModule
+		HttpClientModule,
+    SharedModule
 	]
 })
 export class AppModule { }

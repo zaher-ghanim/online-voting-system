@@ -1,5 +1,5 @@
 <div class="dashboard-container">
-    <h2>Active Polls</h2>
+    <h3>Active Polls</h3>
 
     <mat-card *ngIf="currentUser?.hasVoted" class="info-card">
         <mat-card-content>
@@ -12,11 +12,11 @@
         <mat-card class="poll-mat-card">
             <mat-card-header>
                 <mat-card-title>{{ poll.question }}</mat-card-title>
-               
+
             </mat-card-header>
 
             <mat-card-content>
-              
+
 
                 <div *ngIf="poll.isActive && !hasVotedInPoll(poll.id)" class="poll-options">
                     <div *ngFor="let option of poll.options" class="option">

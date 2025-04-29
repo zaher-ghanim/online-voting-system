@@ -2,17 +2,18 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private currentUser: User | null = null;
 
-  constructor() { }
+  constructor() {}
 
-login(username: string, password: string): boolean {
+  login(username: string, password: string): boolean {
     const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find((u: User) => u.username === username && u.password === password);
+    const user = users.find(
+      (u: User) => u.username === username && u.password === password
+    );
 
     if (user) {
       this.currentUser = user;
@@ -29,7 +30,9 @@ login(username: string, password: string): boolean {
 
   getCurrentUser(): User | null {
     if (!this.currentUser) {
-      this.currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+      this.currentUser = JSON.parse(
+        localStorage.getItem('currentUser') || 'null'
+      );
     }
     return this.currentUser;
   }

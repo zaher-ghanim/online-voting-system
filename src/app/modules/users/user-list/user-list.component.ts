@@ -5,9 +5,9 @@ import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-user-list',
-  standalone:false,
+  standalone: false,
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.sass']
+  styleUrls: ['./user-list.component.sass'],
 })
 export class UserListComponent {
   users: User[] = [];
@@ -33,9 +33,11 @@ export class UserListComponent {
     }
 
     if (confirm('Are you sure you want to delete this user?')) {
-      const users = this.userService.getAllUsers().filter(u => u.id !== userId);
+      const users = this.userService
+        .getAllUsers()
+        .filter((u) => u.id !== userId);
       localStorage.setItem('users', JSON.stringify(users));
-      this.loadUsers();  // Refresh the user list
+      this.loadUsers();
     }
   }
 }

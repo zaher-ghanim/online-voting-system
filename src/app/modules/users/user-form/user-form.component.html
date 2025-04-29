@@ -1,4 +1,5 @@
 <div class="user-form-container">
+  <div class="container">
     <h2>{{ isEditMode ? 'Edit User' : 'Create New User' }}</h2>
 
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
@@ -33,4 +34,6 @@
         </div>
 
     </form>
+  </div>
+
 </div>

@@ -13,10 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [
-    PollListComponent,
-    PollFormComponent
-  ],
+  declarations: [PollListComponent, PollFormComponent],
   imports: [
     CommonModule,
     PollsRoutingModule,
@@ -27,7 +24,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule   
-  ]
+    MatIconModule,
+  ],
 })
-export class PollsModule { }
+export class PollsModule {}
+[];

@@ -7,9 +7,9 @@ import { PollService } from '../../../services/poll.service';
 
 @Component({
   selector: 'app-poll-form',
-  standalone:false,
+  standalone: false,
   templateUrl: './poll-form.component.html',
-  styleUrls: ['./poll-form.component.sass']
+  styleUrls: ['./poll-form.component.sass'],
 })
 export class PollFormComponent implements OnInit {
   pollForm: FormGroup;
@@ -25,10 +25,10 @@ export class PollFormComponent implements OnInit {
   ) {
     this.pollForm = this.fb.group({
       question: ['', Validators.required],
-      options: this.fb.array([
-        this.createOption(),
-        this.createOption()
-      ], Validators.minLength(2))
+      options: this.fb.array(
+        [this.createOption(), this.createOption()],
+        Validators.minLength(2)
+      ),
     });
   }
 
@@ -39,13 +39,15 @@ export class PollFormComponent implements OnInit {
       const poll = this.pollService.getPollById(this.currentPollId);
       if (poll) {
         this.pollForm.patchValue({
-          question: poll.question
+          question: poll.question,
         });
         this.options.clear();
-        poll.options.forEach(option => {
-          this.options.push(this.fb.group({
-            text: [option.text, Validators.required]
-          }));
+        poll.options.forEach((option) => {
+          this.options.push(
+            this.fb.group({
+              text: [option.text, Validators.required],
+            })
+          );
         });
       }
     }
@@ -57,7 +59,7 @@ export class PollFormComponent implements OnInit {
 
   createOption(): FormGroup {
     return this.fb.group({
-      text: ['', Validators.required]
+      text: ['', Validators.required],
     });
   }
 
@@ -77,20 +79,25 @@ export class PollFormComponent implements OnInit {
       if (!currentUser) return;
 
       const poll: Poll = {
-        id: this.isEditMode && this.currentPollId ? this.currentPollId : this.pollService.generatePollId(),
+        id:
+          this.isEditMode && this.currentPollId
+            ? this.currentPollId
+            : this.pollService.generatePollId(),
         question: this.pollForm.value.question,
         options: this.pollForm.value.options.map((option: any) => ({
           id: this.pollService.generateOptionId(),
           text: option.text,
-          votes: 0
+          votes: 0,
         })),
         createdBy: currentUser.username,
         createdAt: new Date(),
-        isActive: true
+        isActive: true,
       };
 
       if (this.isEditMode) {
-        const polls = this.pollService.getAllPolls().filter(p => p.id !== this.currentPollId);
+        const polls = this.pollService
+          .getAllPolls()
+          .filter((p) => p.id !== this.currentPollId);
         polls.push(poll);
         localStorage.setItem('polls', JSON.stringify(polls));
       } else {
@@ -100,6 +107,4 @@ export class PollFormComponent implements OnInit {
       this.router.navigate(['/polls']);
     }
   }
-
-
 }

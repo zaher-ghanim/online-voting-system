@@ -1,4 +1,4 @@
 export interface Votes {
-    pollid: string;
-    userid: string;
+  pollid: string;
+  userid: string;
 }
